@@ -3,4 +3,4 @@
 mkdir -p volumes/node{1..6}-data/var-lib-redis
 
 #build redis cluster image
-build . --tag redis-cluster:4.0.0
+docker build . --tag redis-cluster:4.0.0

@@ -34,7 +34,6 @@ RUN set -ex; \
 	\
 	buildDeps=' \
 		wget \
-		\
 		gcc \
 		libc6-dev \
 		make \

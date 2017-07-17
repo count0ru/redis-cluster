@@ -6,6 +6,7 @@ services:
       - ./volumes/node1-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
     container_name: node1
+    restart: always
     build:
       context: redis-cluster
   node-2:
@@ -13,6 +14,7 @@ services:
     volumes:
       - ./volumes/node2-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
     container_name: node2
     build:
       context: redis-cluster
@@ -21,6 +23,7 @@ services:
     volumes:
       - ./volumes/node3-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
     container_name: node3
     build:
       context: redis-cluster
@@ -29,6 +32,7 @@ services:
     volumes:
       - ./volumes/node4-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
     container_name: node4
     build:
       context: redis-cluster
@@ -37,6 +41,7 @@ services:
     volumes:
       - ./volumes/node5-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
     container_name: node5
     build:
       context: redis-cluster
@@ -45,6 +50,7 @@ services:
     volumes:
       - ./volumes/node6-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
     container_name: node6
     build:
       context: redis-cluster

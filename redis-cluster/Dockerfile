@@ -65,6 +65,40 @@ RUN set -ex; \
 	\
 	apt-get purge -y --auto-remove $buildDeps
 
+#
+# ReJSON JSON storing and parsing support
+#
+ENV REJSON_COMMIT be53adb0f46972f50d2a55486d46256644dfa2e2
+ENV REJSON_DOWNLOAD_URL "https://github.com/RedisLabsModules/rejson/archive/$REJSON_COMMIT.tar.gz"
+ENV REJSON_DOWNLOAD_SHA 8d5e725800a46ce31bbe10ebb308bc29bf0f8f8fa74fafa0e1409048b48c6e92
+
+RUN set -ex; \
+	\
+	buildDeps=' \
+		build-essential \
+		wget \
+		ca-certificates \
+	'; \
+	apt-get update; \
+	apt-get install -y $buildDeps --no-install-recommends; \
+	rm -rf /var/lib/apt/lists/*; \
+	\
+	mkdir -p /usr/src/rejson; \
+	wget -O rejson.tar.gz "$REJSON_DOWNLOAD_URL"; \
+	echo "$REJSON_DOWNLOAD_SHA *rejson.tar.gz" | sha256sum -c -; \
+	mkdir -p /usr/src/rejson; \
+	tar -xzf rejson.tar.gz -C /usr/src/rejson --strip-components=1; \
+	rm rejson.tar.gz; \
+	\
+	make -C /usr/src/rejson -j "$(nproc)"; \
+	\
+	mkdir -p /usr/local/lib/rejson; \
+	cp /usr/src/rejson/src/rejson.so /usr/local/lib/rejson/rejson.so; \
+	\
+	rm -r /usr/src/rejson; \
+	\
+	apt-get purge -y --auto-remove $buildDeps
+
 RUN mkdir /data && chown redis:redis /data
 VOLUME /data
 WORKDIR /data

@@ -5,29 +5,50 @@ services:
     volumes:
       - ./volumes/node1-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    container_name: rediscluster_node-1_1
+    restart: always
+    build:
+      context: redis-cluster
   node-2:
     image: redis-cluster:4.0.0
     volumes:
       - ./volumes/node2-data/var-lib-redis:/var/lib/redis
-    network_mode: bridge
+    network_mode: bridge 
+    restart: always
+    container_name: rediscluster_node-2_1
+    build:
+      context: redis-cluster
   node-3:
     image: redis-cluster:4.0.0
     volumes:
       - ./volumes/node3-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
+    container_name: rediscluster_node-3_1
   node-4:
     image: redis-cluster:4.0.0
     volumes:
       - ./volumes/node4-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
+    container_name: rediscluster_node-4_1
+    build:
+      context: redis-cluster
   node-5:
     image: redis-cluster:4.0.0
     volumes:
       - ./volumes/node5-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
+    restart: always
+    container_name: rediscluster_node-5_1
+    build:
+      context: redis-cluster
   node-6:
     image: redis-cluster:4.0.0
     volumes:
       - ./volumes/node6-data/var-lib-redis:/var/lib/redis
     network_mode: bridge
-
+    restart: always
+    container_name: rediscluster_node-6_1
+    build:
+      context: redis-cluster
